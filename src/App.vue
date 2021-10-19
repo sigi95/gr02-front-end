@@ -1,30 +1,80 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app" class="app">
+
+    <div class="Imagen">
+      <h3>Imagen</h3>
+
+      <img src="Mapa Colombia.jpg">    
+    </div>
+
+    <div class="header">
+      <h1>CITY TOUR TRAVEL</h1>
+    </div>
+
+    <div class="subtitulo">
+      <h2>"Descubre las maravillas de Colombia"</h2>
+    </div>
   </div>
-  <router-view/>
 </template>
 
+<script>
+export default{
+  name: 'App',
+  data: function(){
+  },
+  methods:{
+  },
+  created: function(){ 
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  body{
+    margin:0000; 
+  }
+  .Imagen h3{
+    display: none;
+    background-color: #ffcc3e;
+    align-items: center;
+  }
+  .Imagen img {
+    height: 100px;
+    display: block;
+    background-color: #ffcc3e;
+    align-items: center;
+} 
+  .header{
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 5vh;
+    min-height: 50px;
+    background-color: #ffcc3e;
+    color:#2d34a3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header h1{
+    width: 100%;
+    text-align: center;   
+  }
+  .subtitulo{
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 5vh;
+    min-height: 50px;
+    background-color: #ffcc3e;
+    color:#ca3f3f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .subtitulo h2{
+    width: 100%;
+    text-align: center;
+    font-family: cursive;
+  }
 </style>
