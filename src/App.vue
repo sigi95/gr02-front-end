@@ -1,80 +1,131 @@
 <template>
-  <div id="app" class="app">
 
-    <div class="Imagen">
-      <h3>Imagen</h3>
+	<div class="navbar">
+		<div class="container">
+			<div class="logo">
+				<h1>City Tour Travel</h1>
+			</div>
+			<nav>
+				<ul>
+					<li> <a href="">Inicio</a> </li>
+					<li> <a href="">Tours</a> </li>
+					<li> <a href="">Carrito</a> </li>
 
-      <img src="Mapa Colombia.jpg">    
-    </div>
+				</ul>
+				<div class="button">
+					<a v-if="!isAuth" href="">Iniciar Sesión</a>
+					<a v-if="!isAuth" href="">Registrarse</a>
+				</div>
+			</nav>
+		</div>
+	</div>
 
-    <div class="header">
-      <h1>CITY TOUR TRAVEL</h1>
-    </div>
+	<div class="main-component">
+		<router-view>
+		</router-view>
+	</div>
 
-    <div class="subtitulo">
-      <h2>"Descubre las maravillas de Colombia"</h2>
-    </div>
-  </div>
+	<div class="footer">
+  		<p class="text-center"> &copy; 2021 Copyright: City Tour Travel</p>
+	</div>
+
 </template>
 
 <script>
-export default{
-  name: 'App',
-  data: function(){
-  },
-  methods:{
-  },
-  created: function(){ 
-  }
+export default {
+	name: 'App',
+
+	data: function(){
+		return{
+			isAuth: false
+		}
+	},
+
+	methods: {
+		loadHome(){
+			this.$router.push({name: 'Home'})
+		}
+	},
+
+	mounted(){
+		this.loadHome();
+	}
 }
+
+
 </script>
 
 <style>
-  body{
-    margin:0000; 
-  }
-  .Imagen h3{
-    display: none;
-    background-color: #ffcc3e;
-    align-items: center;
-  }
-  .Imagen img {
-    height: 100px;
-    display: block;
-    background-color: #ffcc3e;
-    align-items: center;
-} 
-  .header{
-    margin:0;
-    padding:0;
-    width: 100%;
-    height: 5vh;
-    min-height: 50px;
-    background-color: #ffcc3e;
-    color:#2d34a3;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .header h1{
-    width: 100%;
-    text-align: center;   
-  }
-  .subtitulo{
-    margin:0;
-    padding:0;
-    width: 100%;
-    height: 5vh;
-    min-height: 50px;
-    background-color: #ffcc3e;
-    color:#ca3f3f;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .subtitulo h2{
-    width: 100%;
-    text-align: center;
-    font-family: cursive;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+.navbar{
+	width: 100%;
+	height: 80px;
+	box-sizing: border-box;
+	background-color: #eaa928;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+}
+
+.navbar .container{
+	max-width: 1300px;
+	margin: 0px auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 80px;
+
+}
+
+nav{
+	display: flex;
+}
+nav ul{
+	display: flex;
+	margin-right: 10px;
+}
+nav ul li{
+	list-style: none;
+}
+nav ul li a{
+	color: #fff;
+	text-decoration: none;
+	font-size: 20px;
+	margin: 0px 20px;
+}
+
+.navbar .button a{
+	text-decoration: none;
+	background-color: #fff;
+	color: #eaa928;
+	padding: 6px 12px;
+	margin: 8px;
+	border-radius: 5px;
+	font-size: 17px;
+}
+
+.navbar .button a:hover{
+	background-color: rgb(208, 209, 201);
+}
+
+.footer{
+	background-color: #eaa928;
+	height: 75px;
+	align-items: center;
+}
+
+.text-center {
+	padding: 22px;
+	text-align: center;
+	font-family: 'Poppins', sans-serif;
+	font-size: 20px;
+}
+
+
 </style>
+
