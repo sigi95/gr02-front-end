@@ -13,8 +13,8 @@
 
         <div  v-for="(city,i) in cities" :key="i" class="card">
             <img :src=images[i] >
-            <h2>{{ cities[i] }}</h2>
-            <a href="#">Ver Tours</a>
+            <h2 ref="data_tour">{{ cities[i] }}</h2>
+            <a @click="loadTours">Ver Tours</a>
         </div>
 
     </section>
@@ -27,6 +27,7 @@ import cucuta from '../assets/images/cucuta.jpg'
 import medellin from '../assets/images/medellin.jpg'
 import popayan from '../assets/images/popayan.jpg'
 import santander from '../assets/images/santander.jpg'
+import axios from 'axios'
 
 export default {
     name: 'Home',
@@ -35,7 +36,24 @@ export default {
             cities: ['Bogotá','Cúcuta','Medellín','Popayán','Santander'],
             images: [bogota, cucuta, medellin, popayan, santander]
         }
-    }
+    },
+
+	methods: {
+		loadTours: function(){
+            axios.get(
+				//Hasta ahora solo selecciona la ultima ciudad
+                "https://back-despliegue.herokuapp.com/api/tour/" + this.$refs.data_tour.textContent + "/"
+            )
+            .then((response)=>{
+                console.log(response.data);
+                console.log(this.$refs.data_tour.textContent);
+                this.tours = response.data;
+            })
+            .catch((response) => {
+                console.log(response.error);
+            });
+        },
+	}
 }
 </script>
 

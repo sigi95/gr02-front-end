@@ -7,21 +7,25 @@
 			</div>
 			<nav>
 				<ul>
-					<li> <a href="">Inicio</a> </li>
-					<li> <a href="">Tours</a> </li>
-					<li> <a href="">Carrito</a> </li>
+					<li> <a v-on:click="loadHome">Inicio</a> </li>
+					<li> <a @click="loadTours">Tours</a> </li>
+					<li> <a v-if="isAuth" href="">Carrito</a> </li>
 
 				</ul>
 				<div class="button">
-					<a v-if="!isAuth" href="">Iniciar Sesión</a>
-					<a v-if="!isAuth" href="">Registrarse</a>
+					<a v-if="!isAuth" v-on:click="loadLogin">Iniciar Sesión</a>
+					<a v-if="!isAuth" v-on:click="loadSignUp">Registrarse</a>
+					<a v-if="isAuth" v-on:click="loadLogout">Cerrar sesion</a>
 				</div>
 			</nav>
 		</div>
 	</div>
 
 	<div class="main-component">
-		<router-view>
+		<router-view
+		v-on:completedSignUp="completedSignUp"
+		v-on:completedLogin="completedLogin"
+		v-on:loadLogout="loadLogout">
 		</router-view>
 	</div>
 
@@ -42,13 +46,59 @@ export default {
 	},
 
 	methods: {
+		//metodo para verificar la sesion
+		verifyAuth: function(){
+			this.isAuth = localStorage.getItem("isAuth") || false;
+			if(this.isAuth == false)
+				this.$router.push({ name: 'Login' })
+			else
+				this.$router.push({ name: 'Home' })
+		},
+
 		loadHome(){
 			this.$router.push({name: 'Home'})
+		},
+
+		loadLogin(){
+			this.$router.push({ name: 'Login' })
+		},
+
+		loadSignUp(){
+			this.$router.push({ name: 'SignUp' })
+		},
+
+		loadLogout(){
+			localStorage.clear();
+			console.log("Sesion finalizada");
+			this.verifyAuth();
+		},
+
+		loadTours(){
+			this.$router.push({ name: 'Tours' })
+		},
+
+		completedLogin: function(data){
+			localStorage.setItem("isAuth", true);
+            localStorage.setItem("username", data.usu_nombreUsuario);
+            localStorage.setItem("token_access", data.token_access);
+            localStorage.setItem("token_refresh", data.token_refresh);
+            this.verifyAuth();
+            console.log("Autenticacion exitosa");
+		},
+
+		completedSignUp: function(data){
+			console.log("Registro exitoso");
+            this.completedLogin(data);
 		}
+		
 	},
 
 	mounted(){
 		this.loadHome();
+	},
+
+	created: function(){
+		this.verifyAuth()
 	}
 }
 
@@ -97,6 +147,7 @@ nav ul li a{
 	text-decoration: none;
 	font-size: 20px;
 	margin: 0px 20px;
+	cursor: default;
 }
 
 .navbar .button a{
@@ -107,6 +158,7 @@ nav ul li a{
 	margin: 8px;
 	border-radius: 5px;
 	font-size: 17px;
+	cursor: default;
 }
 
 .navbar .button a:hover{
