@@ -32,6 +32,7 @@ import cucuta from '../assets/images/cucuta.jpg'
 import medellin from '../assets/images/medellin.jpg'
 import popayan from '../assets/images/popayan.jpg'
 import santander from '../assets/images/santander.jpg'
+import axios from 'axios'
 
 export default {
     name: 'Home',
