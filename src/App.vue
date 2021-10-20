@@ -1,34 +1,39 @@
 <template>
+	<div id="app" class="app">
 
-	<div class="navbar">
-		<div class="container">
-			<div class="logo">
-				<h1>City Tour Travel</h1>
-			</div>
-			<nav>
-				<ul>
-					<li> <a href="">Inicio</a> </li>
-					<li> <a href="">Tours</a> </li>
-					<li> <a href="">Carrito</a> </li>
-
-				</ul>
-				<div class="button">
-					<a v-if="!isAuth" href="">Iniciar Sesión</a>
-					<a v-if="!isAuth" href="">Registrarse</a>
+		<div class="navbar">
+			<div class="container">
+				<div class="logo">
+					<h1 @click="loadHome">City Tour Travel</h1>
 				</div>
-			</nav>
+				<nav>
+					<div class="link">
+						<button @click="loadHome">Inicio</button>
+						<button @click="loadTours">Tours</button>
+						<button v-if="isAuth" >Cuenta</button>
+						<button >Carrito</button>
+					</div>
+					<div class="button">
+						<button v-if="!isAuth">Iniciar Sesión</button>
+						<button v-if="!isAuth">Registrarse</button>
+						<button v-if="isAuth">Cerrar Sesión</button>
+					</div>
+				</nav>
+			</div>
 		</div>
-	</div>
 
-	<div class="main-component">
-		<router-view>
-		</router-view>
-	</div>
+		<div class="main-component">
+			<router-view
+				v-on:loadTours="loadTours"
+			>
+			</router-view>
+		</div>
 
-	<div class="footer">
-  		<p class="text-center"> &copy; 2021 Copyright: City Tour Travel</p>
-	</div>
+		<div class="footer">
+			<p class="text-center"> &copy; 2021 Copyright: City Tour Travel</p>
+		</div>
 
+	</div>
 </template>
 
 <script>
@@ -42,13 +47,16 @@ export default {
 	},
 
 	methods: {
-		loadHome(){
-			this.$router.push({name: 'Home'})
+		loadHome: function(){
+			this.$router.push({ name: 'home' })
+		},
+		loadTours: function(){
+			this.$router.push({ name: 'tours' })
 		}
 	},
 
-	mounted(){
-		this.loadHome();
+	created(){
+		this.loadHome()
 	}
 }
 
@@ -58,9 +66,9 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
 
-*{
-	margin: 0px;
-	padding: 0px;
+body{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
 .navbar{
@@ -73,8 +81,7 @@ export default {
 }
 
 .navbar .container{
-	max-width: 1300px;
-	margin: 0px auto;
+	margin: auto 18px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -82,34 +89,41 @@ export default {
 
 }
 
-nav{
-	display: flex;
+.logo{
+	cursor: pointer;
 }
-nav ul{
+
+nav{
 	display: flex;
 	margin-right: 10px;
 }
-nav ul li{
-	list-style: none;
-}
-nav ul li a{
+
+.link button{
+	background-color: #eaa928;
+	border: none;
 	color: #fff;
-	text-decoration: none;
-	font-size: 20px;
-	margin: 0px 20px;
+	padding: 5px;
+	margin: 8px 12px;
+	border-radius: 5px;
+	font-size: 22px;
 }
 
-.navbar .button a{
-	text-decoration: none;
+.link button:hover{
 	background-color: #fff;
+	color: #eaa928;
+}
+
+.button button{
+	background-color: #fff;
+	border: none;
 	color: #eaa928;
 	padding: 6px 12px;
 	margin: 8px;
 	border-radius: 5px;
-	font-size: 17px;
+	font-size: 18px;
 }
 
-.navbar .button a:hover{
+.button button:hover{
 	background-color: rgb(208, 209, 201);
 }
 
