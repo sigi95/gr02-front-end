@@ -104,6 +104,7 @@ export default {
 	},
 
 	created: function(){
+		this.verifyAuth()
 		this.loadHome()
 	}
 }
