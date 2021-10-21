@@ -5,6 +5,7 @@ import Home from './components/Home.vue'
 import Login from './components/Login.vue'
 import SignUp from './components/SignUp.vue'
 import Tours from './components/Tours.vue'
+import AddTour from './components/AddTour.vue'
 
 const routes = [
   {
@@ -14,7 +15,7 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'home',
+    name: 'Home',
     component: Home
   },
   {
@@ -31,6 +32,11 @@ const routes = [
     path: '/tours',
     name: 'Tours',
     component: Tours
+  },
+  {
+    path:'/tours/add/:id',
+    name:'AddTour',
+    component: AddTour
   }
 ]
 

@@ -197,7 +197,7 @@ body{
 	background-color: rgba(0, 0, 0, 0);
 }
 
-.cities .card a:hover{
+.cities .card button:hover{
     color: #b88900;
 }
 

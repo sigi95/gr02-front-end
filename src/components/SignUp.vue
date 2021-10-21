@@ -36,8 +36,8 @@
 </template>
 
 <script>
-    //importo la libreria axios
-    import axios from 'axios';
+//importo la libreria axios
+import axios from 'axios';
 
 export default {
     name: "IniciarSesion",

@@ -1,79 +1,121 @@
 <template>
-<<<<<<< HEAD
-    
-
-</template>
-
-<script>
-export default {
-    name: 'Tours',
-}
-</script>
-
-<style>
-
-
-
-</style>
-=======
     <div id="tours" class="tours">
-        <div v-for="tour in tours" :key="tour.ciu_nombre">
-            <h1>Tours que ofrece la ciudad de {{ tour.ciu_nombre }}</h1>
-            <label>Nombre: <span>{{ tour.tour_nombre }}</span></label>
+
+        <div v-for="(tour, i) in tours" :key="tour.tour_nombre" class="card">
+            <img src="../assets/tours/prueba.jpg">
+            <label><strong>Nombre: </strong><span>{{ tour.tour_nombre }}</span></label>
             <br> 
-            <label for="">Descripcion: <span>{{ tour.tour_descripcion }}</span></label>
+            <label><strong>Descripción: </strong><span>{{ tour.tour_descripcion }}</span></label>
             <br>
-            <label for="">Precio: <span>{{ tour.tour_precio }}</span></label>
+            <label><strong>Precio: </strong><span>{{ tour.tour_precio }}</span></label>
             <br> 
-            <label for="">Hora inicio: <span>{{ tour.tour_fechaHoraInicio}}</span></label>
+            <label><strong>Hora inicio: </strong><span>{{ tour.tour_fechaHoraInicio}}</span></label>
             <br> 
-            <label for="">Hora fin: <span>{{ tour.tour_fechaHoraFin }}</span></label>
+            <label><strong>Hora fin: </strong><span>{{ tour.tour_fechaHoraFin }}</span></label>
             <br>
-            <label for="">Duracion: <span>{{ tour.tour_duracionHoras }}</span> Horas</label>
+            <label><strong>Duración: </strong><span>{{ tour.tour_duracionHoras }}</span> Horas</label>
             <br>
-            <button>Agregar al carrito</button>
+            <button @click="addToCart" :id=i>Agregar al carrito</button>
         </div>
-        <button id="data_bogota" ref="data_bogota" value="Bogota" @click="listarTours">Bogota</button>
         
     </div>
 </template>
 
-<style>
-    #data_bogota{
-        width: 20%;
-        height: 5em;
-    }
-</style>
 
 <script>
-    import axios from 'axios';
+import axios from 'axios';
 
 export default {
     name: "Tours",
 
-    //para los datos que se manejan en la pagina
     data: function(){
         return {
-            tours: [],
+            tours: []
         }
     },
 
-    //se manejan las funciones como post, put, delete, get
     methods: {
-        listarTours: function(){
-            axios.get(
-                "https://back-despliegue.herokuapp.com/api/tour/" + this.$refs.data_bogota.value
-            )
-            .then((response)=>{
-                console.log(response.data);
-                console.log(this.$refs.data_bogota.value);
-                this.tours = response.data;
-            })
-            .catch((response) => {
-                console.log(response.error);
-            });
+        async getAllTours(){
+
+            axios.get("https://back-despliegue.herokuapp.com/api/tour/listar/")
+                .then((result) => {
+                    this.tours = result.data.tours
+                })
+                .catch((e) => {
+                    console.log(e)
+                });
+        },
+
+        addToCart(event){
+            this.tourId = this.tours[parseInt(event.srcElement.id)].tour_id
+            this.$emit('addToCart',this.tourId)
         }
     },
+
+    created(){
+        this.getAllTours();
+    }
 }
 </script>
->>>>>>> 5c8cf572ecf2e92573b8b57ec9663d642dd93a97
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+
+.tours{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 50px;
+    min-height: 80vh;
+}
+
+.tours .card{
+    width: 330px;
+    height: 490px;
+    border-radius: 8px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 20px;
+    text-align: left;
+    transition: all 0.25s;
+    background-color: #fcfbf7;
+}
+
+.tours .card:hover{
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+.tours .card img{
+    width: 330px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.tours .card label{
+    font-family: 'Poppins', sans-serif;
+    margin: 20px;
+}
+
+
+
+.tours .card button{
+    width: 80%;
+    height: 30px;
+    margin: 25px 30px;
+    font-weight: 600;
+	font-size: 16px;
+    color: #eaa928;
+	background-color:rgba(0, 0, 0, 0);
+	border: 1px solid ;
+    border-radius: 8px;
+	cursor: pointer;
+}
+
+.tours .card button:hover{
+    color: #fff;
+	background-color: #eaa928;
+}
+
+
+</style>
