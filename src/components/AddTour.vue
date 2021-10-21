@@ -91,7 +91,17 @@ export default {
                             localStorage.setItem("token_access", result.data.access);
                         })
                         .catch(() => {
-                            alert("Debes iniciar sesión para poder comprar tours")
+                            //alert("Debes iniciar sesión para poder comprar tours")
+                            if (Notification.permission !== "granted") {
+                                Notification.requestPermission()
+                            }
+                            var title = "City Tour Travel"
+                            var extra = {
+                                icon: "favicon.ico.ico.ico",
+                                body: "Debes iniciar sesión para poder comprar tours."
+                            }
+                            var noti = new Notification( title, extra)
+                            setTimeout( function() { noti.close() }, 10000)
                             this.$emit('loadLogout');
                         });
         },
@@ -99,7 +109,17 @@ export default {
         async getData(){
 
             if (localStorage.getItem("token_access") === null || localStorage.getItem("token_refresh") === null) {
-                alert("Debes iniciar sesión para poder comprar tours")
+                //alert("Debes iniciar sesión para poder comprar tours")
+                if (Notification.permission !== "granted") {
+                    Notification.requestPermission()
+                }
+                var title = "City Tour Travel"
+                var extra = {
+                    icon: "favicon.ico.ico.ico",
+                    body: "Debes iniciar sesión para poder comprar tours."
+                }
+                var noti = new Notification( title, extra)
+                setTimeout( function() { noti.close() }, 10000)
                 this.$emit('loadLogout');
                 return;
             }
@@ -124,7 +144,17 @@ export default {
         async buyTour(){
 
             if (this.numberPeople < 1){
-                alert("El número de personas debe ser mayor o igual a 1")
+                //alert("El número de personas debe ser mayor o igual a 1")
+                if (Notification.permission !== "granted") {
+                    Notification.requestPermission()
+                }
+                var title = "City Tour Travel"
+                var extra = {
+                    icon: "favicon.ico.ico.ico",
+                    body: "Debes iniciar sesión para poder comprar tours."
+                }
+                var noti = new Notification( title, extra)
+                setTimeout( function() { noti.close() }, 10000)
                 return;
             }
 
@@ -140,11 +170,31 @@ export default {
 
             await axios.post( `https://back-despliegue.herokuapp.com/api/carrito/registro/`, data, {headers: {'Authorization': `Bearer ${token}`}} )
                 .then((result) => {
-                    alert("Compra Realizada Exitosamente")
+                    //alert("Compra Realizada Exitosamente")
+                    if (Notification.permission !== "granted") {
+                        Notification.requestPermission()
+                    }
+                    var title = "City Tour Travel"
+                    var extra = {
+                        icon: "favicon.ico.ico.ico",
+                        body: "Compra realizada exitosamente."
+                    }
+                    var noti = new Notification( title, extra)
+                    setTimeout( function() { noti.close() }, 10000)
                     this.$emit('loadTours')
                 })
                 .catch((error) => {
-                    alert("Ocurrió un Error")
+                    //alert("Ocurrió un Error")
+                    if (Notification.permission !== "granted") {
+                        Notification.requestPermission()
+                    }
+                    var title = "City Tour Travel"
+                    var extra = {
+                        icon: "favicon.ico.ico.ico",
+                        body: "Ocurrio un error al momento de crear su compra."
+                    }
+                    var noti = new Notification( title, extra)
+                    setTimeout( function() { noti.close() }, 10000)
                     console.log(error)
                 })
         }
