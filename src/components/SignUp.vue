@@ -105,7 +105,7 @@ export default {
                 }
                 var title = "City Tour Travel"
                 var extra = {
-                    icon: "favicon.ico.ico.ico",
+                    icon: "favicon.ico",
                     body: "Gracias por registrarte en City Tour Travel, los datos de usuario y contraseña se enviaron a tu correo electronico."
                 }
                 var noti = new Notification( title, extra)
@@ -119,7 +119,7 @@ export default {
                 }
                 var title = "Error al registrarse"
                 var extra = {
-                    icon: "favicon.ico.ico.ico",
+                    icon: "favicon.ico",
                     body: "Parece que a ocurrido un fallo a la hora de realizar tu registro."
                 }
                 var noti = new Notification( title, extra)

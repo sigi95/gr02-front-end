@@ -49,7 +49,7 @@ export default {
                 }
                 var title = "Bienvenido a City Tour Travel"
                 var extra = {
-                    icon: "favicon.ico.ico.ico",
+                    icon: "favicon.ico",
                     body: "Usuario: " + this.user.usu_nombreUsuario
                 }
                 var noti = new Notification( title, extra)
@@ -63,7 +63,7 @@ export default {
                     }
                     var title = "Error 401"
                     var extra = {
-                        icon: "favicon.ico.ico.ico",
+                        icon: "favicon.ico",
                         body: "ERROR 401: Credenciales Incorrectas."
                     }
                     var noti = new Notification( title, extra)

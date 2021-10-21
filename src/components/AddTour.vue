@@ -115,7 +115,7 @@ export default {
                 }
                 var title = "City Tour Travel"
                 var extra = {
-                    icon: "favicon.ico.ico.ico",
+                    icon: "favicon.ico",
                     body: "Debes iniciar sesión para poder comprar tours."
                 }
                 var noti = new Notification( title, extra)
@@ -150,7 +150,7 @@ export default {
                 }
                 var title = "City Tour Travel"
                 var extra = {
-                    icon: "favicon.ico.ico.ico",
+                    icon: "favicon.ico",
                     body: "Debes iniciar sesión para poder comprar tours."
                 }
                 var noti = new Notification( title, extra)
@@ -176,7 +176,7 @@ export default {
                     }
                     var title = "City Tour Travel"
                     var extra = {
-                        icon: "favicon.ico.ico.ico",
+                        icon: "favicon.ico",
                         body: "Compra realizada exitosamente."
                     }
                     var noti = new Notification( title, extra)
@@ -190,7 +190,7 @@ export default {
                     }
                     var title = "City Tour Travel"
                     var extra = {
-                        icon: "favicon.ico.ico.ico",
+                        icon: "favicon.ico",
                         body: "Ocurrio un error al momento de crear su compra."
                     }
                     var noti = new Notification( title, extra)
