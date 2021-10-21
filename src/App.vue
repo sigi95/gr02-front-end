@@ -3,9 +3,9 @@
 
 		<div class="navbar">
 			<div class="container">
-				<div class="logo">
-					<link href="favicon.ico.ico.ico" type ="image/x-icon" rel="shortcut icon" />
-					<h1 @click="loadHome">City Tour Travel</h1>
+				<div @click="loadHome" class="logo">
+					<img src="./assets/logoCityTourTravel2.png">
+					<h1>City Tour Travel</h1>
 				</div>
 				<nav>
 					<div class="link">
@@ -141,6 +141,12 @@ body{
 
 .logo{
 	cursor: pointer;
+	display: flex;
+}
+
+.logo img{
+	height: 65px;
+	margin: 10px 10px 10px 10px;
 }
 
 nav{
