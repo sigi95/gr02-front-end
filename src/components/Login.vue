@@ -3,9 +3,9 @@
         <div class="contenedor_iniciarSesion_usuario">
             <h2>Iniciar sesion</h2>
             <form v-on:submit.prevent="procesoIniciarSesion">
-                <input type="text" v-model="user.usu_nombreUsuario" placeholder="Nombre de usuario">
+                <input type="text" v-model="user.usu_nombreUsuario" placeholder="Nombre de usuario" required>
                 <br>
-                <input type="password" v-model="user.password" placeholder="Contraseña">
+                <input type="password" v-model="user.password" placeholder="Contraseña" required>
                 <br>
                 <button type="submit"> Iniciar Sesion </button>
             </form>
@@ -57,7 +57,17 @@ export default {
             })
             .catch((error) => {
                 if(error.response.status == "401")
-                    alert("ERROR 401: Credenciales Incorrectas.");
+                    //alert("ERROR 401: Credenciales Incorrectas.");
+                    if (Notification.permission !== "granted") {
+                        Notification.requestPermission()
+                    }
+                    var title = "Error 401"
+                    var extra = {
+                        icon: "favicon.ico.ico.ico",
+                        body: "ERROR 401: Credenciales Incorrectas."
+                    }
+                    var noti = new Notification( title, extra)
+                    setTimeout( function() { noti.close() }, 10000)
             })
         }
     }

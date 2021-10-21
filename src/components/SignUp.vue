@@ -3,32 +3,42 @@
         <div class="contenedor_registro_usuario">
             <h2>Registrarse</h2>
             <form v-on:submit.prevent="procesoRegistro">
-                <input type="text" v-model="user.id" placeholder="Identificacion">
+                <input type="text" v-model="user.id" placeholder="Identificacion" required>
+                <span class="error" v-if="user.id && !validarId">*El campo debe de ser solo numeros y min 7 caracteres.</span>
                 <br>
-                <select name="tipo_identificacion" v-model="user.usu_tipoId" id="tipo_identificacion">
+                <select name="tipo_identificacion" v-model="user.usu_tipoId" id="tipo_identificacion" required>
                     <option value="">Selecciona una opcion</option>
                     <option value="CC">Cédula de Ciudadanía</option>
                     <option value="CE">Cédula de Extranjeria</option>
                     <option value="NIT">NIT</option>
                 </select>
                 <br>
-                <input type="text" v-model="user.usu_nombreUsuario" placeholder="Nombre de usuario">
+                <input type="text" v-model="user.usu_nombreUsuario" placeholder="Nombre de usuario" required>
+                <span class="error" v-if="user.usu_nombreUsuario && !validarUsuario">min 4 y Max 10 caracteres</span>
                 <br>
-                <input type="password" v-model="user.password" placeholder="Contraseña">
+                <input type="password" v-model="user.password" placeholder="Contraseña" required>
+                <span class="error" v-if="user.password && !validarContra">*Min 4 y max 16 caracteres</span>
                 <br>
-                <input type="text" v-model="user.usu_nombre" placeholder="Nombres">
+                <input type="text" v-model="user.usu_nombre" placeholder="Nombres" required>
+                <span class="error" v-if="user.usu_nombre && !validarNombre">*El campo solo requiere letras.</span>
                 <br>
-                <input type="text" v-model="user.usu_apellido1" placeholder="Primer apellido">
+                <input type="text" v-model="user.usu_apellido1" placeholder="Primer apellido" required>
+                <span class="error" v-if="user.usu_apellido1 && !validarApellido">*El campo solo requiere letras.</span>
                 <br>
-                <input type="text" v-model="user.usu_apellido2" placeholder="Segundo apellido">
+                <input type="text" v-model="user.usu_apellido2" placeholder="Segundo apellido" required>
+                <span class="error" v-if="user.usu_apellido2 && !validarApellido2">*El campo solo requiere letras.</span>
                 <br>
-                <input type="email" v-model="user.usu_email" placeholder="Email">
+                <input type="email" v-model="user.usu_email" placeholder="Email" required>
+                <span class="error" v-if="user.usu_email && !validarCorreo">*Ingrese un correo electronico valido.</span>
                 <br>
-                <input type="text" v-model="user.usu_telefonoCelular" placeholder="Telefono/Celular">
+                <input type="text" v-model="user.usu_telefonoCelular" placeholder="Telefono/Celular" required>
+                <span class="error" v-if="user.usu_telefonoCelular && !validarTelefono">*El campo solo requiere de numeros sin espacios(min 7 y 10 max).</span>
                 <br>
-                <input type="text" v-model="user.usu_pais" placeholder="Pais">
+                <input type="text" v-model="user.usu_pais" placeholder="Pais" required>
+                <span class="error" v-if="user.usu_pais && !validarPais">*El campo solo requiere de letras(Min 3).</span>
                 <br>
-                <input type="text" v-model="user.usu_ciudad" placeholder="Ciudad">
+                <input type="text" v-model="user.usu_ciudad" placeholder="Ciudad" required>
+                <span class="error" v-if="user.usu_ciudad && !validarCiudad">*El campo solo requiere de letras(Min 3).</span>
                 <br>
                 <button type="submit"> Registrarse </button>
             </form>
@@ -54,10 +64,24 @@ export default {
                 usu_apellido1: "",
                 usu_apellido2: "",
                 usu_email: "",
+                usu_telefonoCelular: "",
                 usu_pais: "",
                 usu_ciudad: ""
             }
         }
+    },
+
+    computed: {
+        validarId() { return /^\d{7,14}$/.test(this.user.id); },//para validar que solo sean numeros y que tengan un rango de 7 a 14 digitos
+        validarUsuario(){ return /^[a-zA-Z0-9\_\-]{4,10}$/.test(this.user.usu_nombreUsuario); }, //para validar que se ingresen minusculas, mayusculas, numeros, _ y guion, de 4 a 10 caracteres
+        validarContra(){ return /^[a-zA-Z0-9\@\#\%\.\ñ\Ñ]{4,16}$/.test(this.user.password); }, //lo mismo que el anterior solo que se puede agregar la letra ñ
+        validarNombre(){ return /^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(this.user.usu_nombre);}, //para validar solo letras incluyendo mayus, minus y acentos
+        validarApellido(){ return /^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(this.user.usu_apellido1);}, //lo mismo que la anterior
+        validarApellido2(){ return /^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(this.user.usu_apellido2);},
+        validarCorreo(){ return /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(this.user.usu_email);},
+        validarTelefono(){ return /^\d{7,10}$/.test(this.user.usu_telefonoCelular);},
+        validarPais(){ return /^[a-zA-ZÀ-ÿ\s]{3,20}$/.test(this.user.usu_pais);},
+        validarCiudad(){ return /^[a-zA-ZÀ-ÿ\s]{3,20}$/.test(this.user.usu_ciudad);},
     },
 
     //Se llama al proceso para hacer el respectivo inicio de sesion
@@ -169,4 +193,6 @@ export default {
         font-size: 17px;
         cursor: default;
     }
+
+    .error{ color: red; }
 </style>
