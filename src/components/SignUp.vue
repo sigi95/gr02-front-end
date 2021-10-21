@@ -139,6 +139,7 @@ export default {
         display: flex;
         margin: 2em auto;
         padding: 3em;
+        
     }
 
     .contenedor_registro_usuario{
@@ -149,6 +150,8 @@ export default {
         border-radius: 2em;
         align-items: center;
         text-align: center;
+        -webkit-box-shadow: -1px 1px 15px -2px rgba(0,0,0,0.98); 
+        box-shadow: -1px 1px 15px -2px rgba(0,0,0,0.98);
     }
 
     .contenedor_registro_usuario form {
@@ -192,6 +195,14 @@ export default {
         border-radius: 5px;
         font-size: 17px;
         cursor: default;
+        cursor: pointer;        
+        transition: background-color .5s;
+    }
+
+
+    .contenedor_registro_usuario > form > button:hover {
+        background-color:#eaa928;
+        color:#464140;
     }
 
     .error{ color: red; }
