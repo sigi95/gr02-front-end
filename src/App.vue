@@ -4,6 +4,7 @@
 		<div class="navbar">
 			<div class="container">
 				<div class="logo">
+					<link href="favicon.ico.ico.ico" type ="image/x-icon" rel="shortcut icon" />
 					<h1 @click="loadHome">City Tour Travel</h1>
 				</div>
 				<nav>
