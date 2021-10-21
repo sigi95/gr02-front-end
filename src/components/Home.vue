@@ -1,24 +1,29 @@
 <template>
-    
-    <section class="banner">
-		<div class="banner-content">
-			<h1>Descubre las maravillas de Colombia</h1>
-			<a href="#">Ver Tours</a>
+    <div class="home">
+
+		<section class="banner">
+			<div class="banner-content">
+				<h1>Descubre las maravillas de Colombia</h1>
+				<button @click="loadTours">Ver Tours</button>
+			</div>
+		</section>
+
+		<h1 class="title">Destinos</h1>
+
+		<div class="container">
+
+			<section class="cities">
+
+				<div  v-for="(city,i) in cities" :key="i" class="card">
+					<img :src=images[i] >
+					<h2>{{ cities[i] }}</h2>
+					<button>Ver Tours</button>
+				</div>
+
+			</section>
 		</div>
-	</section>
-
-    <h1 class="title">Destinos</h1>
-
-    <section class="cities">
-
-        <div  v-for="(city,i) in cities" :key="i" class="card">
-            <img :src=images[i] >
-            <h2>{{ cities[i] }}</h2>
-            <a href="#">Ver Tours</a>
-        </div>
-
-    </section>
-
+		
+	</div>
 </template>
 
 <script>
@@ -27,27 +32,35 @@ import cucuta from '../assets/images/cucuta.jpg'
 import medellin from '../assets/images/medellin.jpg'
 import popayan from '../assets/images/popayan.jpg'
 import santander from '../assets/images/santander.jpg'
+import axios from 'axios'
 
 export default {
     name: 'Home',
-    data(){
+
+    data: function(){
         return {
             cities: ['Bogotá','Cúcuta','Medellín','Popayán','Santander'],
             images: [bogota, cucuta, medellin, popayan, santander]
         }
-    }
+    },
+
+	methods: {
+		loadTours: function(){
+			this.$emit('loadTours')
+		}
+	}
 }
 </script>
 
 <style>
-*{
+body{
     font-family: sans-serif;
 }
 
 .banner{
 	position: relative;
 	width: 100%;
-	height: calc(100vh - 50px);
+	height: calc(100vh - 180px);
 	background-color: #F5F5F5;
 	background-size: cover;
 	background-position: center;
@@ -71,19 +84,21 @@ export default {
 	margin: 0;
 	padding: 0;
 	padding-bottom: 30px;
-	font-size: 40px;
+	font-size: 4rem;
 	text-align: center;
 }
-.banner-content a{
-	text-decoration: none;
+.banner-content button{
 	color: #FFF;
 	padding: 9px 20px;
 	border: 1px solid #FFF;
     border-radius: 8px;
+	font-size: 1.5rem;
+	cursor: pointer;
 	text-transform: uppercase;
 	transition: all .3s ease-in-out;
+	background-color: rgba(0, 0, 0, 0);
 }
-.banner-content a:hover{
+.banner-content button:hover{
 	background-color: #fff;
 	color: #333;
 }
@@ -122,6 +137,11 @@ export default {
 
 }
 
+.container{
+	display: flex;
+	justify-content: center;
+}
+
 .title{
     color:#eaa928;
     text-align: center;
@@ -132,7 +152,6 @@ export default {
 
 .cities{
     width: 100%;
-    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -165,21 +184,20 @@ export default {
     font-weight: 900;
     color: #eaa928;
     padding-top: 1rem;
+	margin: 0px;
 }
 
-.container .card p{
-    padding: 0 1rem;
-    font-size: 16px;
-    font-weight: 300;
-}
 
-.cities .card a{
+.cities .card button{
     font-weight: 600;
-    text-decoration: none;
+	font-size: 16px;
     color: #04040f;
+	border: none;
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0);
 }
 
-.cities .card a:hover{
+.cities .card button:hover{
     color: #b88900;
 }
 

@@ -1,34 +1,43 @@
 <template>
+	<div id="app" class="app">
 
-	<div class="navbar">
-		<div class="container">
-			<div class="logo">
-				<h1>City Tour Travel</h1>
-			</div>
-			<nav>
-				<ul>
-					<li> <a href="">Inicio</a> </li>
-					<li> <a href="">Tours</a> </li>
-					<li> <a href="">Carrito</a> </li>
-
-				</ul>
-				<div class="button">
-					<a v-if="!isAuth" href="">Iniciar Sesión</a>
-					<a v-if="!isAuth" href="">Registrarse</a>
+		<div class="navbar">
+			<div class="container">
+				<div class="logo">
+					<h1 @click="loadHome">City Tour Travel</h1>
 				</div>
-			</nav>
+				<nav>
+					<div class="link">
+						<button @click="loadHome">Inicio</button>
+						<button @click="loadTours">Tours</button>
+						<button v-if="isAuth" >Cuenta</button>
+						<button v-if="isAuth">Carrito</button>
+					</div>
+					<div class="button">
+						<button @click="loadLogin" v-if="!isAuth">Iniciar Sesión</button>
+						<button @click="loadSignUp" v-if="!isAuth">Registrarse</button>
+						<button @click="loadLogout" v-if="isAuth">Cerrar Sesión</button>
+					</div>
+				</nav>
+			</div>
 		</div>
-	</div>
 
-	<div class="main-component">
-		<router-view>
-		</router-view>
-	</div>
+		<div class="main-component">
+			<router-view
+			v-on:completedSignUp="completedSignUp"
+			v-on:completedLogin="completedLogin"
+			v-on:loadLogout="loadLogout"
+			v-on:loadTours="loadTours"
+			v-on:addToCart="addToCart"
+			>
+			</router-view>
+		</div>
 
-	<div class="footer">
-  		<p class="text-center"> &copy; 2021 Copyright: City Tour Travel</p>
-	</div>
+		<div class="footer">
+			<p class="text-center"> &copy; 2021 Copyright: City Tour Travel</p>
+		</div>
 
+	</div>
 </template>
 
 <script>
@@ -42,13 +51,60 @@ export default {
 	},
 
 	methods: {
+		//metodo para verificar la sesion
+		verifyAuth: function(){
+			this.isAuth = localStorage.getItem("isAuth") || false;
+			if(this.isAuth == false)
+				this.$router.push({ name: 'Login' })
+			else
+				this.$router.push({ name: 'Home' })
+		},
+
 		loadHome(){
 			this.$router.push({name: 'Home'})
+		},
+
+		loadLogin(){
+			this.$router.push({ name: 'Login' })
+		},
+
+		loadSignUp(){
+			this.$router.push({ name: 'SignUp' })
+		},
+
+		loadLogout(){
+			localStorage.clear();
+			console.log("Sesion finalizada");
+			this.verifyAuth();
+		},
+
+		loadTours(){
+			this.$router.push({ name: 'Tours' })
+		},
+
+		completedLogin: function(data){
+			localStorage.setItem("isAuth", true);
+            localStorage.setItem("username", data.usu_nombreUsuario);
+            localStorage.setItem("token_access", data.token_access);
+            localStorage.setItem("token_refresh", data.token_refresh);
+            this.verifyAuth();
+            console.log("Autenticacion exitosa");
+		},
+
+		completedSignUp: function(data){
+			console.log("Registro exitoso");
+            this.completedLogin(data);
+		},
+
+		addToCart(tourId){
+			this.tourId = tourId
+			this.$router.push({path : '/tours/add/'+tourId})
 		}
+		
 	},
 
-	mounted(){
-		this.loadHome();
+	created: function(){
+		this.loadHome()
 	}
 }
 
@@ -58,9 +114,9 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
 
-*{
-	margin: 0px;
-	padding: 0px;
+body{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
 
 .navbar{
@@ -73,8 +129,7 @@ export default {
 }
 
 .navbar .container{
-	max-width: 1300px;
-	margin: 0px auto;
+	margin: auto 18px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -82,34 +137,42 @@ export default {
 
 }
 
-nav{
-	display: flex;
+.logo{
+	cursor: pointer;
 }
-nav ul{
+
+nav{
 	display: flex;
 	margin-right: 10px;
 }
-nav ul li{
-	list-style: none;
-}
-nav ul li a{
+
+.link button{
+	background-color: #eaa928;
+	border: none;
 	color: #fff;
-	text-decoration: none;
-	font-size: 20px;
-	margin: 0px 20px;
+	padding: 5px;
+	margin: 8px 12px;
+	border-radius: 5px;
+	font-size: 22px;
 }
 
-.navbar .button a{
-	text-decoration: none;
+.link button:hover{
 	background-color: #fff;
+	color: #eaa928;
+}
+
+.button button{
+	background-color: #fff;
+	border: none;
 	color: #eaa928;
 	padding: 6px 12px;
 	margin: 8px;
 	border-radius: 5px;
 	font-size: 17px;
+	cursor: default;
 }
 
-.navbar .button a:hover{
+.button button:hover{
 	background-color: rgb(208, 209, 201);
 }
 
