@@ -5,7 +5,7 @@
 
         <div class="info">
 
-            <img src="../assets/tours/prueba.jpg">
+            <img src="../assets/tours/ElDoradoenBici1.jpg">
 
             <div class="description">
                 <label> <strong>Ciudad: </strong> {{ tour.ciu_nombre_id }}</label>
@@ -151,7 +151,7 @@ export default {
                 var title = "City Tour Travel"
                 var extra = {
                     icon: "favicon.ico",
-                    body: "Debes iniciar sesión para poder comprar tours."
+                    body: "Debes ingresar la cantidad de personas para adquirir el tour."
                 }
                 var noti = new Notification( title, extra)
                 setTimeout( function() { noti.close() }, 10000)

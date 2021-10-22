@@ -11,7 +11,6 @@
 					<div class="link">
 						<button @click="loadHome">Inicio</button>
 						<button @click="loadTours">Tours</button>
-						<button v-if="isAuth" >Cuenta</button>
 						<button v-if="isAuth">Carrito</button>
 					</div>
 					<div class="button">

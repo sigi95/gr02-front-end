@@ -5,6 +5,8 @@
             <img src="../assets/tours/prueba.jpg">
             <label><strong>Nombre: </strong><span>{{ tour.tour_nombre }}</span></label>
             <br> 
+            <label> <strong>Ciudad: </strong> {{ tour.ciu_nombre_id }}</label>
+            <br>
             <label><strong>Descripción: </strong><span>{{ tour.tour_descripcion }}</span></label>
             <br>
             <label><strong>Precio: </strong><span>{{ tour.tour_precio }}</span></label>
@@ -20,7 +22,6 @@
         
     </div>
 </template>
-
 
 <script>
 import axios from 'axios';
@@ -71,7 +72,7 @@ export default {
 
 .tours .card{
     width: 330px;
-    height: 490px;
+    height: 600px;
     border-radius: 8px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -98,24 +99,22 @@ export default {
 }
 
 
-
 .tours .card button{
     width: 80%;
     height: 30px;
     margin: 25px 30px;
     font-weight: 600;
-	font-size: 16px;
+    font-size: 16px;
     color: #eaa928;
-	background-color:rgba(0, 0, 0, 0);
-	border: 1px solid ;
+    background-color:rgba(0, 0, 0, 0);
+    border: 1px solid ;
     border-radius: 8px;
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .tours .card button:hover{
     color: #fff;
-	background-color: #eaa928;
+    background-color: #eaa928;
 }
-
 
 </style>

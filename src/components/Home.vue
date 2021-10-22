@@ -17,7 +17,7 @@
 				<div  v-for="(city,i) in cities" :key="i" class="card">
 					<img :src=images[i] >
 					<h2>{{ cities[i] }}</h2>
-					<button>Ver Tours</button>
+					<button @click="loadTours">Ver Tours</button>
 				</div>
 
 			</section>
