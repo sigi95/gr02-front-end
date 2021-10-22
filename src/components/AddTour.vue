@@ -5,14 +5,14 @@
 
         <div class="info">
 
-            <img :src="`https://github.com/sigi95/mintic-p33-gr02/blob/master/imagenes/tours/${tour.tour_id}.png?raw=true`">
+            <img :src="`https://github.com/sigi95/gr02-front-end/blob/main/src/assets/tours/${tour.tour_id}.png?raw=true`">
 
             <div class="description">
                 <label> <strong>Ciudad: </strong> {{ tour.ciu_nombre_id }}</label>
                 <br>
                 <label> <strong>Descripción: </strong> {{ tour.tour_descripcion }}</label>
                 <br>
-                <label> <strong>Precio: </strong> {{ tour.tour_precio }}</label>
+                <label> <strong>Precio: </strong> {{ tour.tour_precio }} COP</label>
                 <br>
                 <label> <strong>Fecha Inicio: </strong> {{ tour.tour_fechaHoraInicio }}</label>
                 <br>

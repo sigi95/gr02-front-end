@@ -5,7 +5,7 @@
 
         <div class="purchase-info">
 
-            <img :src="`https://github.com/sigi95/mintic-p33-gr02/blob/master/imagenes/tours/${tour.tour_id}.png?raw=true`">
+            <img :src="`https://github.com/sigi95/gr02-front-end/blob/main/src/assets/tours/${tour.tour_id}.png?raw=true`">
 
             <div class="labels">
                 <label><strong>Documento: </strong></label>
