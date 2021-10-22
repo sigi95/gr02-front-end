@@ -144,7 +144,6 @@ export default {
         async buyTour(){
 
             if (this.numberPeople < 1){
-                //alert("El número de personas debe ser mayor o igual a 1")
                 if (Notification.permission !== "granted") {
                     Notification.requestPermission()
                 }
@@ -181,7 +180,7 @@ export default {
                     }
                     var noti = new Notification( title, extra)
                     setTimeout( function() { noti.close() }, 10000)
-                    this.$emit('loadTours')
+                    this.$emit('loadTours', 'all')
                 })
                 .catch((error) => {
                     //alert("Ocurrió un Error")

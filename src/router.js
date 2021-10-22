@@ -6,6 +6,7 @@ import Login from './components/Login.vue'
 import SignUp from './components/SignUp.vue'
 import Tours from './components/Tours.vue'
 import AddTour from './components/AddTour.vue'
+import Cart from './components/Cart.vue'
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path:'/tours/add/:id',
     name:'AddTour',
     component: AddTour
+  },
+  {
+    path:'/cart',
+    name:'Cart',
+    component: Cart
   }
 ]
 
