@@ -1,27 +1,28 @@
 <template>
     <div class="cart">
 
-        <h1 class="title">Compras Recientes</h1>
+        <h1 class="title">Tours Comprados ({{toursPurchased}}) </h1>
 
-        <div v-if="tour" class="purchase-info">
+        <div v-if="toursPurchased>0" class="tours-purchased">
 
-            <img :src="`https://github.com/sigi95/gr02-front-end/blob/main/src/assets/tours/${tour.tour_id}.png?raw=true`">
+            <div v-for="(purchase ,i) in cart" :key="i" class="purchase-info">
+                <img :src="`https://github.com/sigi95/gr02-front-end/blob/main/src/assets/tours/${purchase.cc_tour_nombre_id}.png?raw=true`">
 
-            <div class="labels">
-                <label><strong>Documento: </strong></label>
-                <label><strong>Tour: </strong></label>
-                <label><strong>Numero de personas: </strong></label>
-                <label><strong>Precio Total: </strong></label>
+                <div class="labels">
+                    <label><strong>Documento: </strong></label>
+                    <label><strong>Tour: </strong></label>
+                    <label><strong>Numero de personas: </strong></label>
+                    <label><strong>Precio Total: </strong></label>
+                </div>
+                <div class="values">
+                    <label>{{ userId }}</label>
+                    <label>{{ toursNames[i] }}</label>
+                    <label>{{ purchase.cc_numeroPersonas }}</label>
+                    <label>{{ purchase.cc_precioTotal }} COP</label>
+                </div>         
             </div>
+        </div> 
 
-            <div class="values">
-                <label>{{ userId }}</label>
-                <label>{{ tour.tour_nombre }}</label>
-                <label>{{ numberPeople }}</label>
-                <label>{{ totalPrice }} COP</label>
-            </div>
-                        
-        </div>
         <div v-else class="noTours">
             <h2>Aún no has comprado tours.</h2>
         </div>
@@ -39,10 +40,9 @@ export default {
     data(){
         return{
             userId: null,
-            tourId: 0,
-            numberPeople: 0,
-            totalPrice: 0,
-            tour: null
+            cart: [],
+            toursNames: [],
+            toursPurchased: 0
         }
     },
 
@@ -93,24 +93,34 @@ export default {
 
             await axios.get(`https://back-despliegue.herokuapp.com/api/carrito/${ userId }/`, {headers: {'Authorization': `Bearer ${token}`}})
                 .then((result) => {
-                    this.tourId = result.data['data tour'].cc_tour_nombre_id
-                    this.numberPeople = result.data['data tour'].cc_numeroPersonas
-                    this.totalPrice = result.data['data tour'].cc_precioTotal
-                })
-                .catch(() => {
-                    console.log('No se han comprado tours')
-                });
-
-            await axios.get("https://back-despliegue.herokuapp.com/api/tour/listar/")
-                .then((result) => {
-                    this.tour =  result.data.tours.find((tour) => {
-                        return tour.tour_id == this.tourId
-                    })
+                    this.cart = result.data["data tour"]
+                    this.toursPurchased = this.cart.length
+                    if (this.toursPurchased>0)
+                        this.getToursNames()
                 })
                 .catch((e) => {
                     console.log('No se han comprado tours')
                 });
+
         },
+
+        async getToursNames(){
+            
+            await axios.get("https://back-despliegue.herokuapp.com/api/tour/listar/")
+                .then((result) => {
+                    let tours = result.data.tours
+                    for (let i=0;i<this.cart.length;i++){
+                        for(let j=0;j<tours.length;j++){
+                            if (this.cart[i].cc_tour_nombre_id == tours[j].tour_id){
+                                this.toursNames.push(tours[j].tour_nombre)
+                            }
+                        }
+                    }
+                })
+                .catch(() => {
+                    console.log('No se han comprado tours')
+                });
+        }
 
     },
 
@@ -135,7 +145,7 @@ export default {
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     padding: 20px;
-    margin: 20px;
+    margin: 40px 20px 40px 20px;
 }
 
 .purchase-info:hover{
