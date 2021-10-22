@@ -2,12 +2,12 @@
     <div id="tours" class="tours">
 
         <div v-for="(tour, i) in tours" :key="tour.tour_nombre" class="card">
-            <img :src="`https://github.com/sigi95/mintic-p33-gr02/blob/master/imagenes/tours/${tour.tour_id}.png?raw=true`">
+            <img :src="`https://github.com/sigi95/gr02-front-end/blob/main/src/assets/tours/${tour.tour_id}.png?raw=true`">
             <label><strong>Nombre: </strong><span>{{ tour.tour_nombre }}</span></label>
             <br> 
             <label> <strong>Ciudad: </strong> {{ tour.ciu_nombre_id }}</label>
             <br>
-            <label><strong>Precio: </strong><span>{{ tour.tour_precio }}</span></label>
+            <label><strong>Precio: </strong><span>{{ tour.tour_precio }} COP</span></label>
             <br> 
             <label><strong>Hora inicio: </strong><span>{{ tour.tour_fechaHoraInicio}}</span></label>
             <br> 

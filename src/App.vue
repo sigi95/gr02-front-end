@@ -11,7 +11,7 @@
 					<div class="link">
 						<button @click="loadHome">Inicio</button>
 						<button @click="loadTours('all')">Tours</button>
-						<button v-if="isAuth">Carrito</button>
+						<button @click="loadCart" v-if="isAuth">Carrito</button>
 					</div>
 					<div class="button">
 						<button @click="loadLogin" v-if="!isAuth">Iniciar Sesión</button>
@@ -99,6 +99,10 @@ export default {
 		addToCart(tourId){
 			this.tourId = tourId
 			this.$router.push({path : '/tours/add/'+tourId})
+		},
+
+		loadCart(){
+			this.$router.push({name : 'Cart'})
 		}
 		
 	},
