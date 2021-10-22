@@ -10,7 +10,7 @@
 				<nav>
 					<div class="link">
 						<button @click="loadHome">Inicio</button>
-						<button @click="loadTours">Tours</button>
+						<button @click="loadTours('all')">Tours</button>
 						<button v-if="isAuth">Carrito</button>
 					</div>
 					<div class="button">
@@ -78,8 +78,8 @@ export default {
 			this.verifyAuth();
 		},
 
-		loadTours(){
-			this.$router.push({ name: 'Tours' })
+		loadTours(city){
+			this.$router.push({path : '/tours/'+city})
 		},
 
 		completedLogin: function(data){

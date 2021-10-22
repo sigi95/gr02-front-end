@@ -4,7 +4,7 @@
 		<section class="banner">
 			<div class="banner-content">
 				<h1>Descubre las maravillas de Colombia</h1>
-				<button @click="loadTours">Ver Tours</button>
+				<button id='all' @click="loadTours">Ver Tours</button>
 			</div>
 		</section>
 
@@ -17,7 +17,7 @@
 				<div  v-for="(city,i) in cities" :key="i" class="card">
 					<img :src=images[i] >
 					<h2>{{ cities[i] }}</h2>
-					<button @click="loadTours">Ver Tours</button>
+					<button :id=city @click="loadTours">Ver Tours</button>
 				</div>
 
 			</section>
@@ -45,8 +45,9 @@ export default {
     },
 
 	methods: {
-		loadTours: function(){
-			this.$emit('loadTours')
+		loadTours: function(event){
+			let city = event.srcElement.id
+			this.$emit('loadTours', city)
 		}
 	}
 }

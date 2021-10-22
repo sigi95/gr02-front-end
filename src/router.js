@@ -29,7 +29,7 @@ const routes = [
     component: SignUp
   },
   {
-    path: '/tours',
+    path: '/tours/:city',
     name: 'Tours',
     component: Tours
   },

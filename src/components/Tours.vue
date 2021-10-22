@@ -2,12 +2,10 @@
     <div id="tours" class="tours">
 
         <div v-for="(tour, i) in tours" :key="tour.tour_nombre" class="card">
-            <img src="../assets/tours/prueba.jpg">
+            <img :src="`https://github.com/sigi95/mintic-p33-gr02/blob/master/imagenes/tours/${tour.tour_id}.png?raw=true`">
             <label><strong>Nombre: </strong><span>{{ tour.tour_nombre }}</span></label>
             <br> 
             <label> <strong>Ciudad: </strong> {{ tour.ciu_nombre_id }}</label>
-            <br>
-            <label><strong>Descripción: </strong><span>{{ tour.tour_descripcion }}</span></label>
             <br>
             <label><strong>Precio: </strong><span>{{ tour.tour_precio }}</span></label>
             <br> 
@@ -31,16 +29,23 @@ export default {
 
     data: function(){
         return {
-            tours: []
+            tours: [],
+            city: this.$route.params.city
         }
     },
 
     methods: {
         async getAllTours(){
 
-            axios.get("https://back-despliegue.herokuapp.com/api/tour/listar/")
+            await axios.get("https://back-despliegue.herokuapp.com/api/tour/listar/")
                 .then((result) => {
-                    this.tours = result.data.tours
+                    this.tours = result.data.tours.filter((t) => {
+                        return t.ciu_nombre_id == this.city
+                    })
+
+                    if(this.city === 'all'){
+                        this.tours = result.data.tours
+                    }
                 })
                 .catch((e) => {
                     console.log(e)
@@ -71,8 +76,8 @@ export default {
 }
 
 .tours .card{
-    width: 330px;
-    height: 600px;
+    width: 340px;
+    height: 480px;
     border-radius: 8px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     overflow: hidden;
@@ -88,7 +93,7 @@ export default {
 }
 
 .tours .card img{
-    width: 330px;
+    width: 340px;
     height: 200px;
     margin-bottom: 20px;
 }

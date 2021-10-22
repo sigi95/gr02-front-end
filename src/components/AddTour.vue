@@ -5,7 +5,7 @@
 
         <div class="info">
 
-            <img src="../assets/tours/ElDoradoenBici1.jpg">
+            <img :src="`https://github.com/sigi95/mintic-p33-gr02/blob/master/imagenes/tours/${tour.tour_id}.png?raw=true`">
 
             <div class="description">
                 <label> <strong>Ciudad: </strong> {{ tour.ciu_nombre_id }}</label>
