@@ -3,7 +3,7 @@
 
         <h1 class="title">Compras Recientes</h1>
 
-        <div class="purchase-info">
+        <div v-if="tour" class="purchase-info">
 
             <img :src="`https://github.com/sigi95/gr02-front-end/blob/main/src/assets/tours/${tour.tour_id}.png?raw=true`">
 
@@ -21,6 +21,9 @@
                 <label>{{ totalPrice }} COP</label>
             </div>
                         
+        </div>
+        <div v-else class="noTours">
+            <h2>Aún no has comprado tours.</h2>
         </div>
 
     </div>
@@ -95,7 +98,7 @@ export default {
                     this.totalPrice = result.data['data tour'].cc_precioTotal
                 })
                 .catch(() => {
-                    this.$emit('loadLogout')
+                    console.log('No se han comprado tours')
                 });
 
             await axios.get("https://back-despliegue.herokuapp.com/api/tour/listar/")
@@ -104,8 +107,8 @@ export default {
                         return tour.tour_id == this.tourId
                     })
                 })
-                .catch(() => {
-                    this.$emit('loadLogout');
+                .catch((e) => {
+                    console.log('No se han comprado tours')
                 });
         },
 
@@ -157,6 +160,9 @@ export default {
     margin-left: 30px;
 }
 
+.noTours h2{
+    margin: 20px;
+}
 
 
 </style>
